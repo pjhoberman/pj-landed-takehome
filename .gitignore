@@ -4,3 +4,6 @@ lib/
 db.sqlite3
 pyvenv.cfg
 .idea/
+instructions.md
+*.pyc
+*__pycache__
