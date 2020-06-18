@@ -7,6 +7,7 @@ urlpatterns = [
     path('', views.api_root),
     path('agent/', views.agent_list, name="agent-list"),
     path('agent/<int:pk>', views.agent_detail, name="agent-detail"),
+    path('agent/<str:field>/<str:value>', views.agent_filter, name="agent-filter"),
 
     path('swagger-ui', TemplateView.as_view(
         template_name='swagger-ui.html',

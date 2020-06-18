@@ -57,6 +57,32 @@ def agent_list(request, format=None):
 
 
 @api_view(['GET'])
+def agent_filter(request, field, value, format=None):
+    """
+    Filter list of agents by one field.
+    Choices are:
+    - first_name
+    - last_name
+    - first_time_agent
+    - region
+    - persona
+    """
+    if request.method == "GET":
+        if field in ['region', 'persona']:
+            agents = Agent.objects.filter(**{'%s__name__contains' % field.lower(): value})
+        elif field in ['first_name', 'last_name']:
+            agents = Agent.objects.filter(**{'%s__contains' % field.lower(): value})
+        elif field == 'first_time_agent':
+            val = True if value.lower() in ["true", "1", "yes"] else False
+            agents = Agent.objects.filter(first_time_agent=val)
+        else:
+            content = {"message": "This field does not exist"}
+            return Response(content, status=status.HTTP_400_BAD_REQUEST)
+        serializer = AgentSerializer(agents, many=True, context={'request': request})
+        return Response(serializer.data)
+
+
+@api_view(['GET'])
 def agent_detail(request, pk, format=None):
     """
     Return details on one agent
@@ -65,7 +91,8 @@ def agent_detail(request, pk, format=None):
         try:
             agent = Agent.objects.get(pk=pk)
         except Agent.DoesNotExist:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+            content = {"message": "This agent does not exist"}
+            return Response(content, status=status.HTTP_400_BAD_REQUEST)
         serializer = AgentSerializer(agent, context={'request': request})
         return Response(serializer.data)
 
