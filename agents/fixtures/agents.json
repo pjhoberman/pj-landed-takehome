@@ -1,0 +1,175 @@
+[
+  {
+    "model": "agents.persona",
+    "pk": 2,
+    "fields": {
+      "name": "Mild"
+    }
+  },
+  {
+    "model": "agents.persona",
+    "pk": 3,
+    "fields": {
+      "name": "Funny"
+    }
+  },
+  {
+    "model": "agents.persona",
+    "pk": 4,
+    "fields": {
+      "name": "Adventurous"
+    }
+  },
+  {
+    "model": "agents.persona",
+    "pk": 5,
+    "fields": {
+      "name": "Professorial"
+    }
+  },
+  {
+    "model": "agents.region",
+    "pk": 1,
+    "fields": {
+      "name": "Hawaii"
+    }
+  },
+  {
+    "model": "agents.region",
+    "pk": 2,
+    "fields": {
+      "name": "Bay Area"
+    }
+  },
+  {
+    "model": "agents.region",
+    "pk": 3,
+    "fields": {
+      "name": "Portland"
+    }
+  },
+  {
+    "model": "agents.region",
+    "pk": 4,
+    "fields": {
+      "name": "Seattle"
+    }
+  },
+  {
+    "model": "agents.region",
+    "pk": 5,
+    "fields": {
+      "name": "Denver"
+    }
+  },
+  {
+    "model": "agents.agent",
+    "pk": 12,
+    "fields": {
+      "first_name": "Robert",
+      "last_name": "Whistler",
+      "first_time_agent": false,
+      "persona": 2,
+      "region": 1
+    }
+  },
+  {
+    "model": "agents.agent",
+    "pk": 13,
+    "fields": {
+      "first_name": "Paul",
+      "last_name": "Storjohann",
+      "first_time_agent": false,
+      "persona": 3,
+      "region": 2
+    }
+  },
+  {
+    "model": "agents.agent",
+    "pk": 14,
+    "fields": {
+      "first_name": "Sarah",
+      "last_name": "Cortes",
+      "first_time_agent": true,
+      "persona": 4,
+      "region": 3
+    }
+  },
+  {
+    "model": "agents.agent",
+    "pk": 15,
+    "fields": {
+      "first_name": "Mariko",
+      "last_name": "Mellas",
+      "first_time_agent": false,
+      "persona": 2,
+      "region": 2
+    }
+  },
+  {
+    "model": "agents.agent",
+    "pk": 16,
+    "fields": {
+      "first_name": "Robert",
+      "last_name": "Mathieu",
+      "first_time_agent": false,
+      "persona": 2,
+      "region": 4
+    }
+  },
+  {
+    "model": "agents.agent",
+    "pk": 17,
+    "fields": {
+      "first_name": "Melissa",
+      "last_name": "Glazener",
+      "first_time_agent": false,
+      "persona": 2,
+      "region": 5
+    }
+  },
+  {
+    "model": "agents.agent",
+    "pk": 18,
+    "fields": {
+      "first_name": "Raymond",
+      "last_name": "Smith",
+      "first_time_agent": true,
+      "persona": 2,
+      "region": 2
+    }
+  },
+  {
+    "model": "agents.agent",
+    "pk": 19,
+    "fields": {
+      "first_name": "Rebecca",
+      "last_name": "Miller",
+      "first_time_agent": true,
+      "persona": 2,
+      "region": 5
+    }
+  },
+  {
+    "model": "agents.agent",
+    "pk": 20,
+    "fields": {
+      "first_name": "Glen",
+      "last_name": "Christian",
+      "first_time_agent": true,
+      "persona": 5,
+      "region": 2
+    }
+  },
+  {
+    "model": "agents.agent",
+    "pk": 21,
+    "fields": {
+      "first_name": "Brent",
+      "last_name": "Stanfill",
+      "first_time_agent": false,
+      "persona": 3,
+      "region": 5
+    }
+  }
+]
