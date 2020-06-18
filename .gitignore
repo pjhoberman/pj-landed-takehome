@@ -6,7 +6,7 @@ pyvenv.cfg
 .idea/
 instructions.md
 *.pyc
-__pycache__/
+*__pycache__*
 *.log
 
 # Environments

@@ -1,23 +1,32 @@
-# from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework.parsers import JSONParser
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
+
 from agents.models import Agent, Region, Persona
 from agents.serializers import AgentSerializer
 
 
-@csrf_exempt
-def agent_list(request):
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response({
+        'agents': reverse('agent-list', request=request, format=format),
+    })
+
+
+@api_view(['GET'])
+def agent_list(request, format=None):
     """
     List all agents
     """
     if request.method == 'GET':
         agents = Agent.objects.all()
-        serializer = AgentSerializer(agents, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        serializer = AgentSerializer(agents, many=True, context={'request': request})
+        return Response(serializer.data)
 
 
-def agent_detail(request, pk):
+@api_view(['GET'])
+def agent_detail(request, pk, format=None):
     """
     Return details on one agent
     """
@@ -25,7 +34,7 @@ def agent_detail(request, pk):
         try:
             agent = Agent.objects.get(pk=pk)
         except Agent.DoesNotExist:
-            return HttpResponse(status=404)
-        serializer = AgentSerializer(agent)
-        return JsonResponse(serializer.data)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        serializer = AgentSerializer(agent, context={'request': request})
+        return Response(serializer.data)
 
