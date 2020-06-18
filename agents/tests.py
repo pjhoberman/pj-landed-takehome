@@ -1,8 +1,8 @@
 from django.test import TestCase
-from rest_framework.test import APIRequestFactory, APIClient
+from rest_framework.test import APIClient
 from rest_framework import status
 
-from .models import Agent, Region
+from .models import Agent
 
 
 class TestAPI(TestCase):
@@ -68,9 +68,3 @@ class TestAPI(TestCase):
         # test bad call
         response = client.get('agent/243930')
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
-
-
-
-
-
-

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from agents.models import Agent, Region, Persona
+from agents.models import Agent
 
 
 class AgentSerializer(serializers.ModelSerializer):
@@ -8,5 +8,4 @@ class AgentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Agent
-        fields = ['url', 'id', 'first_name', 'last_name', 'first_time_agent', 'persona', 'region',]
-
+        fields = ['url', 'id', 'first_name', 'last_name', 'first_time_agent', 'persona', 'region', ]

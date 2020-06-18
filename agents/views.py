@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
-from agents.models import Agent, Region, Persona
+from agents.models import Agent
 from agents.serializers import AgentSerializer
 
 
@@ -99,4 +99,3 @@ def agent_detail(request, pk, format=None):
             return Response(content, status=status.HTTP_400_BAD_REQUEST)
         serializer = AgentSerializer(agent, context={'request': request})
         return Response(serializer.data)
-
