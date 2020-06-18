@@ -2,7 +2,7 @@ from django.test import TestCase
 from rest_framework.test import APIRequestFactory, APIClient
 from rest_framework import status
 
-from .models import Agent
+from .models import Agent, Region
 
 
 class TestAPI(TestCase):
@@ -12,14 +12,14 @@ class TestAPI(TestCase):
         client = APIClient()
 
         # no filter
-        request = client.get('/agent/')
-        self.assertEqual(request.status_code, status.HTTP_200_OK)
-        agents = request.json()
+        response = client.get('/agent/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        agents = response.json()
         self.assertEqual(len(agents), 10)
 
         # filter first name
-        request = client.get('/agent/', data={'first_name': 'rob'})
-        agents = request.json()
+        response = client.get('/agent/', data={'first_name': 'rob'})
+        agents = response.json()
         self.assertEqual(len(agents), 2)
 
         rob = Agent.objects.get(pk=12)
@@ -28,14 +28,32 @@ class TestAPI(TestCase):
         self.assertNotIn(brent.pk, [agent['id'] for agent in agents])
 
         # filter first_time_agent bool
-        request = client.get('/agent/', data={'first_time_agent': 'true'})
-        agents = request.json()
+        response = client.get('/agent/', data={'first_time_agent': 'true'})
+        agents = response.json()
         self.assertTrue(all([agent['first_time_agent'] for agent in agents]))
 
-        request = client.get('/agent/', data={'first_time_agent': 'false'})
-        agents = request.json()
+        response = client.get('/agent/', data={'first_time_agent': 'false'})
+        agents = response.json()
         self.assertFalse(any([agent['first_time_agent'] for agent in agents]))
 
+        # test multiple persona
+        response = client.get('/agent/?persona=mild&persona=prof')
+        agents = response.json()
+        personas = set([agent['persona'] for agent in agents])
+        self.assertEqual(personas, {"Mild", "Professorial"})
+
+    def test_agent_filter(self):
+        client = APIClient()
+
+        # test region
+        response = client.get('/agent/region/haw')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        agents = response.json()
+        self.assertTrue(all([True if agent['region'] == "Hawaii" else False for agent in agents]))
+
+        # test bad filter
+        response = client.get('/agent/location/home')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
 
 
