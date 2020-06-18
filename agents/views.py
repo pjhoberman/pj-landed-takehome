@@ -27,12 +27,16 @@ def agent_list(request, format=None):
     So, these searches will all return Robert: "rob", "Rob", "ober", "Robert"
 
     Filterable by the following:
-        first_name (variable text)
-        last_name (variable text)
-        first_time_agent (bool)
-        region (multi-select)
-        personas (multi-select)
+    - first_name
+    - last_name
+    - first_time_agent
+    - region
+    - persona
 
+    Example:
+        ?first_name=rob --> Filters for first name (case insensitive) containing "Rob"
+        ?region=bay&region=den --> Filters for region containing bay or den, would return "Bay Area" and "Denver"
+        ?first_time_agent=true&persona=mild --> Filters for first time agents OR mild personas
     """
     if request.method == 'GET':
         agents = Agent.objects.all()
