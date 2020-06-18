@@ -55,6 +55,19 @@ class TestAPI(TestCase):
         response = client.get('/agent/location/home')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
+    def test_agent_detail(self):
+        client = APIClient()
+
+        # test good call
+        response = client.get('/agent/12')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        agent = response.json()
+        self.assertEqual(agent['id'], 12)
+        self.assertEqual(agent['last_name'], "Whistler")
+
+        # test bad call
+        response = client.get('agent/243930')
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
 
 
