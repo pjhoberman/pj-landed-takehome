@@ -31,5 +31,5 @@ PJ's Landed Take-Home Assignment
     
 1. Visit http://127.0.0.1:8000/ to see the api root.
     1. http://127.0.0.1:8000/agent to list all agents and see documentation
-    1. http://127.0.0.1:8000/agent/<field>/<value> to filter by a single field
-    1. http://127.0.0.1:8000/agent/<id> to see details on a single agent
+    1. http://127.0.0.1:8000/agent/{field}/{value} to filter by a single field
+    1. http://127.0.0.1:8000/agent/{id} to see details on a single agent
