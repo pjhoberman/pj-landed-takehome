@@ -39,7 +39,7 @@ def agent_list(request, format=None):
         ?first_time_agent=true&persona=mild --> Filters for first time agents OR mild personas
     """
     if request.method == 'GET':
-        agents = Agent.objects.all()
+        agents = Agent.objects.all().order_by('last_name')
         q = Q()
         # todo: and vs or, on a field or between fields
         for param, value in request.query_params.lists():
@@ -82,6 +82,7 @@ def agent_filter(request, field, value, format=None):
         else:
             content = {"message": "This field does not exist"}
             return Response(content, status=status.HTTP_400_BAD_REQUEST)
+        agents = agents.order_by('last_name')
         serializer = AgentSerializer(agents, many=True, context={'request': request})
         return Response(serializer.data)
 
